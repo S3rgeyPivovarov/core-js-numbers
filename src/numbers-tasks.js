@@ -319,15 +319,9 @@ function getSumOfDigits(num) {
  *   15  => false
  */
 function isPowerOfTwo(num) {
-  while (num !== 1) {
-    let x = num;
-    if (x % 2 === 0) {
-      x /= 2;
-    } else {
-      return false;
-    }
-  }
-  return true;
+  if (num < 1) return false;
+  const power = Math.log2(num);
+  return Number.isInteger(power);
 }
 
 /**
@@ -434,7 +428,7 @@ function getNumberValue(number) {
  * '5'      => false
  */
 function isNumber(number) {
-  return typeof number === 'number';
+  return typeof number === 'number' && Number.isFinite(number);
 }
 
 /**
@@ -449,7 +443,7 @@ function isNumber(number) {
  * '5'  => false
  */
 function isInteger(number) {
-  return typeof number === 'number' && number % 1 === 0;
+  return Number.isInteger(number);
 }
 
 /**
@@ -570,7 +564,7 @@ function getIntegerPartNumber(number) {
  * 0.1, 0.2, 0.3 => 0.6
  */
 function getSumOfNumbers(x1, x2, x3) {
-  return x1 + x2 + x3;
+  return Math.trunc((x1 + x2 + x3) * 10 ** 10) / 10 ** 10;
 }
 
 /**
@@ -616,7 +610,9 @@ function getRandomInteger(min, max) {
  * 3, 4 => 5
  */
 function getHypotenuse(a, b) {
-  return Math.sqrt(a ** 2 + b ** 2);
+  return Number.isFinite(Math.sqrt(a ** 2 + b ** 2))
+    ? Math.sqrt(a ** 2 + b ** 2)
+    : Number.MAX_VALUE;
 }
 
 /**
@@ -633,7 +629,7 @@ function getHypotenuse(a, b) {
  * 15 => 8
  */
 function getCountOfOddNumbers(number) {
-  return Math.trunc(number / 2 + 0.5);
+  return Math.trunc(Math.abs(number) / 2 + 0.5);
 }
 
 module.exports = {
