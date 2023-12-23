@@ -475,7 +475,11 @@ function getFloatOnString(str) {
  * '10', 8              => 8
  */
 function getIntegerOnString(str, base) {
-  return parseInt(str, base);
+  const parsed = Number.parseInt(str, base);
+  if (Number.isNaN(parsed)) {
+    return NaN;
+  }
+  return parsed;
 }
 
 /**
